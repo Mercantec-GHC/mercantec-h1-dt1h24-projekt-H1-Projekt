@@ -1,4 +1,5 @@
 using BlazorApp.Components;
+using BlazorApp.Service;
 
 namespace BlazorApp
 {
@@ -11,7 +12,11 @@ namespace BlazorApp
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
-
+            builder.Services.AddSingleton(sp =>
+            {
+                var connectionstring = builder.Configuration.GetConnectionString(name: "DefaultConnection");
+                return new DBService(connectionstring);
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
