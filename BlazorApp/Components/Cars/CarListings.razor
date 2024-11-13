@@ -1,0 +1,38 @@
+﻿@namespace MiniCarsMarketplace.Components.Cars
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    @foreach (var car in Cars)
+    {
+        <div class="car-card">
+            <div class="car-image">
+                <div class="car-price">$@(car.Price.ToString("N0"))</div>
+            </div>
+            <div class="car-details">
+                <h3 class="font-semibold mb-2">@(car.Name)</h3>
+                <p class="text-sm text-gray-600">@(car.Mileage.ToString("N0")) km</p>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<CarModel> Cars { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        Cars = Enumerable.Range(1, 8).Select(i => new CarModel
+            {
+                Name = $"Mini Cooper {2020 + i}",
+                Price = Random.Shared.Next(10000, 60000),
+                Mileage = Random.Shared.Next(0, 50000)
+            }).ToList();
+    }
+
+    private class CarModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public int Mileage { get; set; }
+    }
+}
+
