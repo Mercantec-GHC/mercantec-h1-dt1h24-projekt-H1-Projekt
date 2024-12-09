@@ -1,0 +1,13 @@
+@using BlazorApp.Service
+
+<EditForm Model="@EvCooperFormData">
+    <label class="form-label">Battery charge:</label>
+    <InputNumber @bind-Value="EvCooperFormData.ChargeCapacity"/>
+
+    <label class="form-label">Km. pr. kilowatt hour: </label>
+    <InputNumber @bind-Value="EvCooperFormData.KmPrKwh"/>
+</EditForm>
+
+@code{
+    [Parameter] public MiniCooper.EvMiniCooper EvCooperFormData { get; set; } = new();
+}
