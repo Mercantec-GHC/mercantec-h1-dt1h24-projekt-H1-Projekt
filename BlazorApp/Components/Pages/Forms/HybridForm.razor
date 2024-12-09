@@ -1,0 +1,28 @@
+@using BlazorApp.Service
+
+<EditForm Model="HybridCooperFormData">
+    <label class="form-label">Fuel type 1:</label>
+    <InputText @bind-Value="HybridCooperFormData.FuelType1"/>
+
+    <label class="form-label">Fuel type 2:</label>
+    <InputText @bind-Value="HybridCooperFormData.FuelType2"/>
+
+    <label class="form-label">Tank Capacity:</label>
+    <InputNumber @bind-Value="HybridCooperFormData.TankCapacity"/>
+
+    <label class="form-label">Charge Capacity:</label>
+    <InputNumber @bind-Value="HybridCooperFormData.ChargeCapacity"/>
+
+    <label class="form-label">Km. pr. liter:</label>
+    <InputNumber @bind-Value="HybridCooperFormData.KmPrLiter"/>
+
+    <label class="form-label">Km. pr. kilowatt hour:</label>
+    <InputNumber @bind-Value="HybridCooperFormData.KmPrKwh"/>
+
+    <label class="form-label">Gears:</label>
+    <InputNumber @bind-Value="HybridCooperFormData.Gears"/>
+</EditForm>
+
+@code{
+    [Parameter] public MiniCooper.HybridMiniCooper HybridCooperFormData { get; set; } = new();
+}

@@ -1,4 +1,6 @@
 using BlazorApp.Components;
+using BlazorApp.Service;
+using Npgsql;
 
 namespace BlazorApp
 {
@@ -11,6 +13,27 @@ namespace BlazorApp
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+            // The singleton
+            builder.Services.AddSingleton(sp =>
+            {
+                var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+                if (connectionString == null)
+                {
+                    Console.WriteLine("Connection string is null.");
+                    return null;
+                }
+                
+                return new DBService(connectionString);
+            });
+            
+            builder.Services.AddScoped<MiniCooper.BaseMiniCooper>();
+            builder.Services.AddScoped<MiniCooper.EvMiniCooper>();
+            builder.Services.AddScoped<MiniCooper.FossilMiniCooper>();
+            builder.Services.AddScoped<MiniCooper.HybridMiniCooper>();
+            builder.Services.AddScoped<MiniCooper.FullMiniCooper>();
+            builder.Services.AddScoped<UsersService.User>();
 
             var app = builder.Build();
 
